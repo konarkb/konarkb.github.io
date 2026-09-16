@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konark Bajaj — Founder &amp; Builder</title>
+<meta name="description" content="Konark Bajaj — entrepreneurship student at IU Kelley, co-founder of ClockWork and The Patang Story. Building payroll software for India's informal economy and a snacks brand doing $110k+." />
+<meta property="og:title" content="Konark Bajaj — Founder & Builder" />
+<meta property="og:description" content="Co-founder of ClockWork and The Patang Story. Shipping real products, in production, for real customers." />
+<meta property="og:type" content="profile" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0c0c0e; --ink-2:#141418; --ink-3:#1c1c22;
+    --paper:#f4f1ea; --paper-dim:#a8a49b; --paper-faint:#6e6b65;
+    --gold:#e8a33d; --gold-dim:#8a6224;
+    --rule:#26262e;
+    --maxw:1080px;
+    --display:"Instrument Serif",Georgia,serif;
+    --ui:"Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--ink); color:var(--paper);
+    font-family:var(--ui); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px}
+  @media(max-width:640px){ .wrap{padding:0 20px} }
+
+  /* ── nav ── */
+  nav{
+    position:sticky; top:0; z-index:50; background:rgba(12,12,14,.86);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--rule);
+  }
+  .nav-in{display:flex; align-items:center; justify-content:space-between; height:60px}
+  .brand{font-family:var(--mono); font-size:13px; letter-spacing:.06em; color:var(--paper)}
+  .brand b{color:var(--gold); font-weight:500}
+  .nav-links{display:flex; gap:26px; font-size:14px}
+  .nav-links a{color:var(--paper-dim); text-decoration:none; transition:color .15s}
+  .nav-links a:hover{color:var(--gold)}
+  @media(max-width:720px){ .nav-links{display:none} }
+
+  /* ── hero ── */
+  header.hero{padding:86px 0 72px; border-bottom:1px solid var(--rule)}
+  .hero-grid{display:grid; grid-template-columns:1fr 280px; gap:56px; align-items:center}
+  @media(max-width:860px){ .hero-grid{grid-template-columns:1fr; gap:36px} }
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--gold); margin:0 0 20px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::after{content:""; flex:1; height:1px; background:var(--gold-dim); opacity:.5}
+  h1{
+    font-family:var(--display); font-weight:400; font-size:clamp(46px,7.4vw,86px);
+    line-height:1.02; letter-spacing:-.015em; margin:0 0 22px;
+  }
+  h1 em{font-style:italic; color:var(--gold)}
+  .hero-lead{font-size:clamp(16px,2vw,19px); color:var(--paper-dim); max-width:56ch; margin:0 0 30px}
+  .hero-lead strong{color:var(--paper); font-weight:500}
+  .hero-actions{display:flex; flex-wrap:wrap; gap:12px}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:2px;
+    font-size:14px; font-weight:500; text-decoration:none; transition:all .16s; border:1px solid transparent;
+  }
+  .btn-primary{background:var(--gold); color:#1a1205}
+  .btn-primary:hover{background:#f4b45c}
+  .btn-ghost{border-color:var(--rule); color:var(--paper-dim)}
+  .btn-ghost:hover{border-color:var(--gold); color:var(--gold)}
+
+  /* portrait */
+  .portrait-wrap{position:relative}
+  .portrait{
+    width:100%; aspect-ratio:4/5; object-fit:cover; display:block;
+    border:1px solid var(--rule); filter:grayscale(.28) contrast(1.04);
+  }
+  .portrait-ph{
+    width:100%; aspect-ratio:4/5; border:1px dashed var(--gold-dim); display:grid; place-items:center;
+    background:var(--ink-2); color:var(--paper-faint); font-family:var(--mono); font-size:11px;
+    text-align:center; padding:20px; line-height:1.7;
+  }
+  .portrait-tag{
+    position:absolute; bottom:-1px; left:-1px; background:var(--gold); color:#1a1205;
+    font-family:var(--mono); font-size:10px; letter-spacing:.1em; padding:5px 9px; text-transform:uppercase;
+  }
+  @media(max-width:860px){ .portrait-wrap{max-width:220px} }
+
+  /* ── stat strip ── */
+  .stats{border-bottom:1px solid var(--rule); background:var(--ink-2)}
+  .stats-in{display:grid; grid-template-columns:repeat(4,1fr)}
+  @media(max-width:760px){ .stats-in{grid-template-columns:repeat(2,1fr)} }
+  .stat{padding:26px 22px; border-right:1px solid var(--rule)}
+  .stat:last-child{border-right:0}
+  @media(max-width:760px){
+    .stat:nth-child(2n){border-right:0}
+    .stat:nth-child(-n+2){border-bottom:1px solid var(--rule)}
+  }
+  .stat-n{font-family:var(--display); font-size:clamp(28px,4.4vw,40px); line-height:1; color:var(--gold)}
+  .stat-l{font-family:var(--mono); font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--paper-faint); margin-top:9px}
+
+  /* ── sections ── */
+  section{padding:76px 0; border-bottom:1px solid var(--rule)}
+  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:42px}
+  .sec-n{font-family:var(--mono); font-size:12px; color:var(--gold); letter-spacing:.1em}
+  h2{font-family:var(--display); font-weight:400; font-size:clamp(30px,4.4vw,42px); margin:0; letter-spacing:-.01em}
+
+  /* work entries */
+  .entry{
+    display:grid; grid-template-columns:186px 1fr; gap:34px;
+    padding:34px 0; border-top:1px solid var(--rule);
+  }
+  .entry:first-of-type{border-top:0; padding-top:0}
+  @media(max-width:760px){ .entry{grid-template-columns:1fr; gap:14px} }
+  .entry-meta{font-family:var(--mono); font-size:12px; color:var(--paper-faint); line-height:1.9}
+  .entry-role{color:var(--gold); display:block}
+  .entry h3{font-family:var(--display); font-weight:400; font-size:28px; margin:0 0 4px; letter-spacing:-.01em}
+  .entry h3 a{text-decoration:none; border-bottom:1px solid var(--gold-dim); transition:border-color .15s}
+  .entry h3 a:hover{border-color:var(--gold)}
+  .entry-sub{font-size:14px; color:var(--paper-faint); margin:0 0 16px; font-family:var(--mono)}
+  .entry ul{margin:0; padding:0; list-style:none}
+  .entry li{position:relative; padding-left:20px; margin-bottom:11px; color:var(--paper-dim); font-size:15px}
+  .entry li::before{content:"→"; position:absolute; left:0; color:var(--gold-dim); font-size:13px; top:2px}
+  .entry li strong{color:var(--paper); font-weight:500}
+  .tags{display:flex; flex-wrap:wrap; gap:7px; margin-top:16px}
+  .tag{
+    font-family:var(--mono); font-size:11px; padding:4px 9px; border:1px solid var(--rule);
+    color:var(--paper-faint); border-radius:2px;
+  }
+
+  /* two-col lists */
+  .cols{display:grid; grid-template-columns:1fr 1fr; gap:44px}
+  @media(max-width:760px){ .cols{grid-template-columns:1fr; gap:34px} }
+  .mini{border-top:1px solid var(--rule); padding:18px 0}
+  .mini:first-child{border-top:0; padding-top:0}
+  .mini-t{font-size:16px; font-weight:600; margin:0 0 3px}
+  .mini-m{font-family:var(--mono); font-size:12px; color:var(--paper-faint); margin:0 0 8px}
+  .mini-d{font-size:14.5px; color:var(--paper-dim); margin:0}
+  .mini-d a{color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold-dim)}
+
+  .skill-group{margin-bottom:24px}
+  .skill-k{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:10px}
+  .skill-v{color:var(--paper-dim); font-size:15px}
+
+  /* contact */
+  footer{padding:76px 0 64px; text-align:center}
+  .foot-h{font-family:var(--display); font-size:clamp(32px,5vw,50px); margin:0 0 14px; letter-spacing:-.01em}
+  .foot-l{color:var(--paper-dim); margin:0 auto 32px; max-width:46ch}
+  .foot-links{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:44px}
+  .foot-meta{font-family:var(--mono); font-size:11.5px; color:var(--paper-faint); letter-spacing:.04em}
+  .foot-meta a{color:var(--paper-faint)}
+
+  @media(prefers-reduced-motion:reduce){ *{transition:none!important; scroll-behavior:auto!important} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <div class="brand">KONARK<b>.</b>BAJAJ</div>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Founder · Builder · Bloomington, IN</p>
+      <h1>I build things<br>that <em>actually ship.</em></h1>
+      <p class="hero-lead">
+        Entrepreneurship student at <strong>IU Kelley</strong>. Co-founder of <strong>ClockWork</strong>,
+        payroll software running in production for India's informal employers, and
+        <strong>The Patang Story</strong>, a snacks brand that has done <strong>$110,000+</strong> in sales.
+        Currently seeking internship opportunities.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="mailto:ktbajaj@iu.edu">Get in touch</a>
+        <a class="btn btn-ghost" href="LINKEDIN_URL" id="li-top">LinkedIn</a>
+        <a class="btn btn-ghost" href="assets/konark-bajaj-resume.pdf">Résumé (PDF)</a>
+      </div>
+    </div>
+    <div class="portrait-wrap">
+      <div class="portrait-ph" id="portrait-slot">
+        PHOTO<br>GOES HERE<br><br>assets/konark.jpg
+      </div>
+      <span class="portrait-tag">Konark T. Bajaj</span>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap stats-in">
+    <div class="stat"><div class="stat-n">$110k+</div><div class="stat-l">Revenue driven</div></div>
+    <div class="stat"><div class="stat-n">9</div><div class="stat-l">Languages shipped</div></div>
+    <div class="stat"><div class="stat-n">2</div><div class="stat-l">Companies co-founded</div></div>
+    <div class="stat"><div class="stat-n">3.5</div><div class="stat-l">GPA · Dean's List</div></div>
+  </div>
+</div>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-n">01</span><h2>Selected work</h2></div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-role">Co-Founder &amp; CEO</span>
+        May 2026 — Present<br>Technology · India
+      </div>
+      <div>
+        <h3><a href="https://www.tryclockwork.app" target="_blank" rel="noopener">ClockWork Technologies</a></h3>
+        <p class="entry-sub">Attendance, payroll &amp; advances for India's informal employers</p>
+        <ul>
+          <li>Built and shipped a full-stack payroll and attendance platform: <strong>TypeScript monorepo on AWS</strong>, with an employer web portal, a marketing site, and a worker phone app localised into <strong>9 Indian languages</strong>.</li>
+          <li>Engineered a <strong>dual-ledger model</strong> giving employers and employees identical, tamper-evident attendance and pay records, with unpaid gaps surfaced transparently rather than deducted silently.</li>
+          <li>Drove development with <strong>AI agent tooling</strong> — Claude Code CLI, custom MCP servers, headless Playwright harnesses — including adversarial multi-agent test fleets that caught ~30 defects such as wage-calculation and session-isolation bugs.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Prisma</span>
+          <span class="tag">PostgreSQL</span><span class="tag">AWS</span><span class="tag">Claude Code</span><span class="tag">MCP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-role">Co-Founder</span>
+        May 2025 — Present<br>FMCG · India
+      </div>
+      <div>
+        <h3><a href="https://thepatangstory.com/" target="_blank" rel="noopener">The Patang Story</a></h3>
+        <p class="entry-sub">A regional snacks brand rooted in nostalgia</p>
+        <ul>
+          <li>Drove sales of <strong>over $110,000 USD (~₹1.1 Crore)</strong>, overseeing distribution, retail partnerships and direct-to-consumer channels.</li>
+          <li>Led brand strategy and product development for festive campaigns, executing cultural storytelling for new SKUs.</li>
+          <li>Built a consumer venture from scratch in a category dominated by incumbents.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Brand strategy</span><span class="tag">Distribution</span><span class="tag">D2C</span><span class="tag">Product</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="entry-role">Founder</span>
+        Jan 2023 — Aug 2024<br>Social impact · India
+      </div>
+      <div>
+        <h3>EmpowerWomenIndia</h3>
+        <p class="entry-sub">Literacy &amp; inclusion for underserved women in rural India</p>
+        <ul>
+          <li>Increased accessibility of government schemes for women across rural villages in India.</li>
+          <li>Collaborated with the <strong>ARTH Foundation</strong>, running 5 workshops and enrolling ~50 women in Haryana into regional and central schemes for better livelihood.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-n">02</span><h2>Experience</h2></div>
+    <div class="cols">
+      <div>
+        <div class="mini">
+          <p class="mini-t">AI in Finance Intern</p>
+          <p class="mini-m">Ernst &amp; Young · New Delhi · May–Jul 2025</p>
+          <p class="mini-d">Designed and deployed Power BI dashboards tracking Maruti's EV sales performance, delivering executive-ready insights that supported growth discussions. Assessed RPA and Agentic AI applications in finance operations.</p>
+        </div>
+        <div class="mini">
+          <p class="mini-t">Financial Analyst Intern</p>
+          <p class="mini-m">AI Hour, Vancouver · Jun 2023 – Jan 2024</p>
+          <p class="mini-d">Market research and balance-sheet analysis for 4 American payments and EdTech firms, uncovering insights that improved decision-making efficiency by 6%.</p>
+        </div>
+      </div>
+      <div>
+        <div class="mini">
+          <p class="mini-t">Excel &amp; Access Peer Tutor</p>
+          <p class="mini-m">Indiana University · Jan–May 2025</p>
+          <p class="mini-d">Assisted 20+ students across 25 Excel and Access database modules, including string manipulation, in a core Kelley course.</p>
+        </div>
+        <div class="mini">
+          <p class="mini-t">Publications &amp; certifications</p>
+          <p class="mini-m">Selected</p>
+          <p class="mini-d">
+            Bloomberg Capital Markets certification ·
+            <a href="https://shorturl.at/9Nzl4" target="_blank" rel="noopener">Marketing research paper</a> in an economics journal ·
+            <a href="https://shorturl.at/73LaB" target="_blank" rel="noopener">Authored a book</a> on female Nobel Prize winners (Amazon) ·
+            Entrepreneurship 101 (MIT) · Python Programming (Michigan)
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-n">03</span><h2>Education &amp; skills</h2></div>
+    <div class="cols">
+      <div>
+        <div class="mini">
+          <p class="mini-t">Indiana University, Kelley School of Business</p>
+          <p class="mini-m">BS Entrepreneurship · Bloomington, IN · May 2028 · GPA 3.5</p>
+          <p class="mini-d">Dean's List and Founders Scholar. Member of the IU Innovates incubator, Collegiate Entrepreneurs Organization and Sales Club.</p>
+        </div>
+        <div class="mini">
+          <p class="mini-t">The British School, New Delhi</p>
+          <p class="mini-m">IB Diploma · HL Math AI, Economics, Computer Science</p>
+          <p class="mini-d">Head of Strategic Games Club (behavioural economics), founder of Music For A Cause Club.</p>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group">
+          <div class="skill-k">Building</div>
+          <div class="skill-v">Claude Code, MCP &amp; CLI tooling, Python, TypeScript, MySQL, AWS</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-k">Analysis</div>
+          <div class="skill-v">Power BI, Tableau, Bloomberg Terminal, Excel &amp; Access, SEO</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-k">Interests</div>
+          <div class="skill-v">Fintech, AI tooling, entrepreneurship, DJing (Serato suite)</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-k">Off the desk</div>
+          <div class="skill-v">National-level golf, Indian Golf Union (8 handicap) · squash · weightlifting</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2 class="foot-h">Let's build something.</h2>
+    <p class="foot-l">Currently seeking internship opportunities. The fastest way to reach me is email.</p>
+    <div class="foot-links">
+      <a class="btn btn-primary" href="mailto:ktbajaj@iu.edu">ktbajaj@iu.edu</a>
+      <a class="btn btn-ghost" href="LINKEDIN_URL">LinkedIn</a>
+      <a class="btn btn-ghost" href="INSTAGRAM_URL">ClockWork on Instagram</a>
+      <a class="btn btn-ghost" href="https://www.tryclockwork.app" target="_blank" rel="noopener">ClockWork</a>
+      <a class="btn btn-ghost" href="https://thepatangstory.com/" target="_blank" rel="noopener">The Patang Story</a>
+    </div>
+    <!-- Phone numbers deliberately left off the public page: they are on the résumé PDF, which
+         you hand to people, whereas this page gets crawled and scraped. Ask to add them back. -->
+    <p class="foot-meta">
+      Bloomington, Indiana &nbsp;·&nbsp; Citizen of the UK &nbsp;·&nbsp; Open to internships
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
