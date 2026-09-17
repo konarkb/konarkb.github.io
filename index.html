@@ -28,13 +28,17 @@
 <style>
   :root{
     --paper:#faf7f0;
-    --paper-2:#f4f0e5;
+    --paper-2:#f4ece0;       /* hover wash, warmed */
     --ink:#17160f;
-    --ink-2:#4a473d;
-    --ink-3:#7d7a6f;
-    --rule:#e0dacb;
-    --rule-2:#cfc8b5;
-    --link:#8c3a1c;
+    --ink-2:#4a4439;         /* body, off the grey axis */
+    --ink-3:#756e5d;         /* quiet meta */
+    --rule:#e3dbc9;
+    --rule-2:#cfc4ac;
+    --link:#8c3a1c;          /* rust: links and the one true accent */
+    /* Two supporting warms, used only where type is already quiet. Both measured against
+       the paper for AA at their sizes; see the ramp note below. */
+    --umber:#7c5a33;         /* section labels */
+    --tan:#8a6a47;           /* dates and roles */
     --measure:35rem;
     --serif:"Newsreader",Georgia,"Times New Roman",serif;
     --ease:cubic-bezier(.22,.61,.36,1);
@@ -69,7 +73,7 @@
     font-size:clamp(2.7rem,6.6vw,4rem); font-weight:400; line-height:1;
     letter-spacing:-.022em; margin:0 0 .45rem;
   }
-  .sub{font-size:1rem; color:var(--ink-3); font-style:italic; font-weight:300; margin:0 0 1.6rem}
+  .sub{font-size:1rem; color:var(--tan); font-style:italic; font-weight:300; margin:0 0 1.6rem}
   .intro{margin:0; max-width:var(--measure); color:var(--ink-2); font-weight:300; font-size:1.07rem}
   .intro strong{font-weight:500; color:var(--ink)}
 
@@ -107,7 +111,7 @@
   section{margin-top:3.6rem}
   h2{
     font-size:.8rem; font-weight:500; letter-spacing:.13em; text-transform:uppercase;
-    color:var(--ink-3); margin:0 0 1.7rem; padding-bottom:.55rem;
+    color:var(--umber); margin:0 0 1.7rem; padding-bottom:.55rem;
     border-bottom:1px solid var(--rule);
   }
 
@@ -118,13 +122,13 @@
     padding-left:1rem; border-radius:3px;
     transition:background-color .35s var(--ease);
   }
-  .entry:hover{background:rgb(240 235 222 / .55)}
+  .entry:hover{background:rgb(236 226 208 / .5)}
   @media(max-width:700px){
     .entry{grid-template-columns:1fr; gap:.4rem; margin:0 0 1.7rem; padding:0}
     .entry:hover{background:transparent}
   }
   .when{
-    font-size:.9rem; color:var(--ink-3); font-weight:300; font-style:italic;
+    font-size:.9rem; color:var(--tan); font-weight:300; font-style:italic;
     padding-top:.5rem; line-height:1.5; white-space:nowrap;
   }
   @media(max-width:700px){ .when{padding-top:0; font-size:.85rem} }
@@ -144,7 +148,7 @@
   .arr{display:inline-block; font-size:.78em; opacity:0; transform:translateX(-4px);
        transition:opacity .3s var(--ease), transform .3s var(--ease); color:var(--link)}
   .entry:hover .arr{opacity:.85; transform:translateX(0)}
-  .role{font-size:.94rem; color:var(--ink-3); font-style:italic; font-weight:300; margin:.15rem 0 .75rem}
+  .role{font-size:.94rem; color:var(--tan); font-style:italic; font-weight:300; margin:.15rem 0 .75rem}
   .what p{margin:0 0 .75rem; color:var(--ink-2); font-weight:300}
   .what p:last-child{margin-bottom:0}
   .what strong{font-weight:500; color:var(--ink)}
@@ -155,18 +159,18 @@
     padding:.9rem 1rem .9rem 1rem; margin:0 -1rem .5rem; border-radius:3px;
     transition:background-color .35s var(--ease);
   }
-  .brief:hover{background:rgb(240 235 222 / .55)}
+  .brief:hover{background:rgb(236 226 208 / .5)}
   @media(max-width:700px){
     .brief{grid-template-columns:1fr; gap:.25rem; margin:0 0 1.4rem; padding:0}
     .brief:hover{background:transparent}
   }
   .brief .t{font-size:1.05rem; font-weight:500; margin:0}
-  .brief .m{font-size:.92rem; color:var(--ink-3); font-style:italic; font-weight:300; margin:0 0 .35rem}
+  .brief .m{font-size:.92rem; color:var(--tan); font-style:italic; font-weight:300; margin:0 0 .35rem}
   .brief .d{margin:0; color:var(--ink-2); font-weight:300; font-size:.99rem; max-width:var(--measure)}
 
   .also{max-width:var(--measure); color:var(--ink-2); font-weight:300; margin:0 0 .8rem}
   .also:last-child{margin-bottom:0}
-  .also b{font-weight:500; color:var(--ink)}
+  .also b{font-weight:500; color:var(--link)}
 
   /* ── footer ── */
   footer{margin-top:4.2rem; padding-top:1.8rem; border-top:1px solid var(--rule)}
@@ -441,8 +445,8 @@
     <h2>Also</h2>
     <p class="also">
       <b>Written.</b> A marketing research paper in an
-      <a class="u" href="https://shorturl.at/9Nzl4" target="_blank" rel="noopener">economics journal</a>, and a
-      <a class="u" href="https://shorturl.at/73LaB" target="_blank" rel="noopener">book</a> about female Nobel
+      <a class="u" href="https://www.internationaljournalssrg.org/IJEMS/2023/Volume10-Issue4/IJEMS-V10I4P103.pdf" target="_blank" rel="noopener">economics journal</a>, and a
+      <a class="u" href="https://www.amazon.in/Women-Nobel-Prize-Winners-Trailblazers/dp/8196733860" target="_blank" rel="noopener">book</a> about female Nobel
       Prize winners, on Amazon.
     </p>
     <p class="also">
@@ -454,8 +458,9 @@
       Tableau, the Bloomberg Terminal.
     </p>
     <p class="also">
-      <b>Off the desk.</b> National-level golf with the Indian Golf Union, off an eight handicap.
-      Squash, weightlifting, and DJing on the Serato suite.
+      <b>Off the desk.</b> Piano to Grade 4, Trinity College London. National-level golf with the
+      Indian Golf Union, off an eight handicap. Squash, weightlifting, and DJing on the Serato
+      suite.
     </p>
   </section>
 
