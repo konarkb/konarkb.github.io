@@ -8,111 +8,180 @@
 <meta property="og:title" content="Konark Bajaj" />
 <meta property="og:description" content="Co-founder of ClockWork and The Patang Story. Entrepreneurship at IU Kelley." />
 <meta property="og:type" content="profile" />
+<link rel="icon" href="assets/clockwork.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#faf7f0;
+    --paper-2:#f4f0e5;
     --ink:#17160f;
     --ink-2:#4a473d;
     --ink-3:#7d7a6f;
-    --rule:#ddd7c7;
+    --rule:#e0dacb;
+    --rule-2:#cfc8b5;
     --link:#8c3a1c;
-    --measure:34rem;
+    --measure:35rem;
     --serif:"Newsreader",Georgia,"Times New Roman",serif;
+    --ease:cubic-bezier(.22,.61,.36,1);
   }
   *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
+  html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
   body{
-    margin:0; background:var(--paper); color:var(--ink);
-    font-family:var(--serif); font-size:19px; line-height:1.62;
-    font-weight:400; font-variant-numeric:oldstyle-nums proportional-nums;
+    margin:0; color:var(--ink);
+    /* a very slight warmth toward the top, so the page feels like paper under light
+       rather than a flat fill. No gradient anywhere you can point at. */
+    background:var(--paper);
+    background-image:radial-gradient(120% 60% at 50% -10%, #fffdf7 0%, var(--paper) 62%);
+    background-attachment:fixed;
+    font-family:var(--serif); font-size:19px; line-height:1.62; font-weight:400;
     -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   }
-  .page{max-width:53rem; margin:0 auto; padding:5.5rem 2rem 6rem}
-  @media(max-width:700px){ .page{padding:3rem 1.4rem 4rem} body{font-size:18px} }
+  .page{max-width:54rem; margin:0 auto; padding:5rem 2rem 5rem}
+  @media(max-width:700px){ .page{padding:2.6rem 1.4rem 3.5rem} body{font-size:18px} }
 
-  a{color:var(--link); text-decoration:none; border-bottom:1px solid rgb(140 58 28 / .32)}
-  a:hover{border-bottom-color:var(--link)}
+  a{color:var(--link); text-decoration:none}
+  /* underline grows from the left instead of just switching colour */
+  .u{
+    background-image:linear-gradient(currentColor,currentColor);
+    background-size:0% 1px; background-repeat:no-repeat; background-position:0 92%;
+    transition:background-size .32s var(--ease);
+    border-bottom:1px solid rgb(140 58 28 / .28);
+  }
+  .u:hover{background-size:100% 1px; border-bottom-color:transparent}
 
   /* ── masthead ── */
-  .mast{display:flex; gap:2rem; align-items:flex-start; margin-bottom:3.2rem}
-  @media(max-width:560px){ .mast{flex-direction:column-reverse; gap:1.4rem} }
-  .mast-text{flex:1; min-width:0}
+  .mast{display:grid; grid-template-columns:1fr 168px; gap:3rem; align-items:start; margin-bottom:1rem}
+  @media(max-width:620px){ .mast{grid-template-columns:1fr; gap:1.8rem} }
   h1{
-    font-size:clamp(2.6rem,6vw,3.6rem); font-weight:400; line-height:1.04;
-    letter-spacing:-.018em; margin:0 0 .5rem;
+    font-size:clamp(2.7rem,6.6vw,4rem); font-weight:400; line-height:1;
+    letter-spacing:-.022em; margin:0 0 .45rem;
   }
-  .sub{
-    font-size:1.02rem; color:var(--ink-3); font-style:italic; font-weight:300;
-    margin:0 0 1.5rem; letter-spacing:.005em;
-  }
-  .intro{margin:0; max-width:var(--measure); color:var(--ink-2); font-weight:300; font-size:1.06rem}
+  .sub{font-size:1rem; color:var(--ink-3); font-style:italic; font-weight:300; margin:0 0 1.6rem}
+  .intro{margin:0; max-width:var(--measure); color:var(--ink-2); font-weight:300; font-size:1.07rem}
   .intro strong{font-weight:500; color:var(--ink)}
-  .photo{
-    width:132px; height:162px; object-fit:cover; flex:0 0 auto;
-    border:1px solid var(--rule); filter:grayscale(1) contrast(1.03);
-  }
-  .photo-ph{
-    width:132px; height:162px; flex:0 0 auto; border:1px solid var(--rule);
-    background:#f1ece0; display:grid; place-items:center; text-align:center;
-    color:var(--ink-3); font-size:.72rem; font-style:italic; font-weight:300;
-    line-height:1.5; padding:.6rem;
-  }
 
-  .contact-line{margin:1.6rem 0 0; font-size:.96rem; color:var(--ink-3); font-weight:300}
-  .contact-line a{margin-right:.15rem}
-  .sep{color:var(--rule); margin:0 .5rem}
+  .photo-fig{position:relative; margin:0}
+  .photo, .photo-ph{
+    width:168px; height:206px; display:block; border-radius:2px;
+    box-shadow:0 1px 2px rgb(23 22 15 / .07), 0 10px 26px -12px rgb(23 22 15 / .22);
+  }
+  .photo{
+    object-fit:cover; object-position:50% 22%;
+    filter:grayscale(.92) contrast(1.04); transition:filter .5s var(--ease), transform .5s var(--ease);
+  }
+  .photo-fig:hover .photo{filter:grayscale(0) contrast(1); transform:translateY(-3px)}
+  .photo-ph{
+    border:1px dashed var(--rule-2); background:var(--paper-2); display:grid; place-items:center;
+    text-align:center; color:var(--ink-3); font-size:.74rem; font-style:italic;
+    font-weight:300; line-height:1.6; padding:.7rem; box-shadow:none;
+  }
+  @media(max-width:620px){ .photo,.photo-ph{width:136px; height:168px} }
+
+  /* ── contact row ── */
+  .contacts{display:flex; flex-wrap:wrap; gap:.55rem; margin:1.9rem 0 0}
+  .chip{
+    display:inline-flex; align-items:center; gap:.45rem; padding:.42rem .8rem;
+    border:1px solid var(--rule-2); border-radius:2px; background:transparent;
+    color:var(--ink-2); font-size:.92rem; font-weight:400; line-height:1;
+    transition:border-color .25s var(--ease), color .25s var(--ease),
+               background-color .25s var(--ease), transform .25s var(--ease);
+  }
+  .chip svg{width:14px; height:14px; flex:0 0 auto; opacity:.65; transition:opacity .25s var(--ease)}
+  .chip:hover{border-color:var(--ink); color:var(--ink); background:var(--paper-2); transform:translateY(-1px)}
+  .chip:hover svg{opacity:1}
 
   /* ── sections ── */
-  section{margin-top:3.4rem}
+  section{margin-top:3.6rem}
   h2{
-    font-size:.82rem; font-weight:500; letter-spacing:.11em; text-transform:uppercase;
-    color:var(--ink-3); margin:0 0 1.5rem; padding-bottom:.55rem;
+    font-size:.8rem; font-weight:500; letter-spacing:.13em; text-transform:uppercase;
+    color:var(--ink-3); margin:0 0 1.7rem; padding-bottom:.55rem;
     border-bottom:1px solid var(--rule);
   }
 
-  /* entries: year hangs in the left margin at wide sizes */
-  .entry{display:grid; grid-template-columns:8.5rem 1fr; gap:2rem; margin-bottom:2.4rem}
-  @media(max-width:700px){ .entry{grid-template-columns:1fr; gap:.35rem; margin-bottom:2rem} }
-  .when{
-    font-size:.92rem; color:var(--ink-3); font-weight:300; font-style:italic;
-    padding-top:.42rem; line-height:1.5;
+  /* entries */
+  .entry{
+    display:grid; grid-template-columns:8.5rem 1fr; gap:2rem;
+    padding:1.1rem 1rem 1.1rem 0; margin:0 -1rem 1.1rem;
+    padding-left:1rem; border-radius:3px;
+    transition:background-color .35s var(--ease);
   }
-  @media(max-width:700px){ .when{padding-top:0; font-size:.86rem} }
+  .entry:hover{background:rgb(240 235 222 / .55)}
+  @media(max-width:700px){
+    .entry{grid-template-columns:1fr; gap:.4rem; margin:0 0 1.7rem; padding:0}
+    .entry:hover{background:transparent}
+  }
+  .when{
+    font-size:.9rem; color:var(--ink-3); font-weight:300; font-style:italic;
+    padding-top:.5rem; line-height:1.5; white-space:nowrap;
+  }
+  @media(max-width:700px){ .when{padding-top:0; font-size:.85rem} }
   .what{min-width:0; max-width:var(--measure)}
-  h3{font-size:1.3rem; font-weight:500; margin:0 0 .1rem; letter-spacing:-.008em}
-  h3 a{color:var(--ink); border-bottom-color:var(--rule)}
-  h3 a:hover{border-bottom-color:var(--link); color:var(--link)}
-  .role{font-size:.95rem; color:var(--ink-3); font-style:italic; font-weight:300; margin:0 0 .7rem}
+  .title-row{display:flex; align-items:center; gap:.6rem; margin-bottom:.1rem}
+  /* Height-locked, width free: ClockWork's mark is square, Patang's is a wider lockup with
+     type in it, and forcing both into one square box turned Patang into a smudge. */
+  .mark{
+    height:30px; width:auto; max-width:52px; flex:0 0 auto; object-fit:contain;
+    filter:grayscale(1) opacity(.55); transition:filter .4s var(--ease), transform .4s var(--ease);
+  }
+  .mark.sq{border-radius:5px}
+  .entry:hover .mark{filter:grayscale(0) opacity(1); transform:scale(1.06)}
+  h3{font-size:1.32rem; font-weight:500; margin:0; letter-spacing:-.01em}
+  h3 a{color:var(--ink)}
+  h3 a:hover{color:var(--link)}
+  .arr{display:inline-block; font-size:.78em; opacity:0; transform:translateX(-4px);
+       transition:opacity .3s var(--ease), transform .3s var(--ease); color:var(--link)}
+  .entry:hover .arr{opacity:.85; transform:translateX(0)}
+  .role{font-size:.94rem; color:var(--ink-3); font-style:italic; font-weight:300; margin:.15rem 0 .75rem}
   .what p{margin:0 0 .75rem; color:var(--ink-2); font-weight:300}
   .what p:last-child{margin-bottom:0}
   .what strong{font-weight:500; color:var(--ink)}
 
-  /* small two-up for the short entries */
-  .brief{display:grid; grid-template-columns:8.5rem 1fr; gap:2rem; margin-bottom:1.5rem}
-  @media(max-width:700px){ .brief{grid-template-columns:1fr; gap:.25rem; margin-bottom:1.4rem} }
-  .brief .t{font-size:1.04rem; font-weight:500; margin:0}
-  .brief .m{font-size:.93rem; color:var(--ink-3); font-style:italic; font-weight:300; margin:0 0 .35rem}
+  /* brief entries */
+  .brief{
+    display:grid; grid-template-columns:8.5rem 1fr; gap:2rem;
+    padding:.9rem 1rem .9rem 1rem; margin:0 -1rem .5rem; border-radius:3px;
+    transition:background-color .35s var(--ease);
+  }
+  .brief:hover{background:rgb(240 235 222 / .55)}
+  @media(max-width:700px){
+    .brief{grid-template-columns:1fr; gap:.25rem; margin:0 0 1.4rem; padding:0}
+    .brief:hover{background:transparent}
+  }
+  .brief .t{font-size:1.05rem; font-weight:500; margin:0}
+  .brief .m{font-size:.92rem; color:var(--ink-3); font-style:italic; font-weight:300; margin:0 0 .35rem}
   .brief .d{margin:0; color:var(--ink-2); font-weight:300; font-size:.99rem; max-width:var(--measure)}
 
-  .also{max-width:var(--measure); color:var(--ink-2); font-weight:300; margin:0}
-  .also + .also{margin-top:.75rem}
+  .also{max-width:var(--measure); color:var(--ink-2); font-weight:300; margin:0 0 .8rem}
+  .also:last-child{margin-bottom:0}
   .also b{font-weight:500; color:var(--ink)}
 
-  footer{margin-top:4rem; padding-top:1.6rem; border-top:1px solid var(--rule)}
-  .foot{font-size:.93rem; color:var(--ink-3); font-weight:300; margin:0}
+  /* ── footer ── */
+  footer{margin-top:4.2rem; padding-top:1.8rem; border-top:1px solid var(--rule)}
+  .foot-h{font-size:1.5rem; font-weight:400; margin:0 0 .45rem; letter-spacing:-.01em}
+  .foot-l{margin:0 0 1.3rem; color:var(--ink-3); font-weight:300; font-size:1rem; max-width:var(--measure)}
+  .foot-meta{margin:1.6rem 0 0; font-size:.86rem; color:var(--ink-3); font-weight:300; font-style:italic}
 
-  @media(prefers-reduced-motion:reduce){ *{transition:none!important} }
-  @media print{ body{background:#fff} .page{padding:0} }
+  /* ── entrance: a short settle, once, and never for reduced-motion ── */
+  .rise{opacity:0; transform:translateY(14px)}
+  .rise.in{opacity:1; transform:none; transition:opacity .7s var(--ease), transform .7s var(--ease)}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition:none!important; animation:none!important}
+    .rise{opacity:1!important; transform:none!important}
+  }
+  @media print{
+    body{background:#fff}
+    .page{padding:0} .rise{opacity:1!important; transform:none!important}
+  }
 </style>
 </head>
 <body>
 <div class="page">
 
-  <div class="mast">
-    <div class="mast-text">
+  <div class="mast rise">
+    <div>
       <h1>Konark Bajaj</h1>
       <p class="sub">Bloomington, Indiana &amp; New Delhi</p>
       <p class="intro">
@@ -122,24 +191,44 @@
         snacks brand that has sold over <strong>$110,000</strong> worth of product.
         I am looking for an internship where I can keep shipping.
       </p>
-      <p class="contact-line">
-        <a href="mailto:ktbajaj@iu.edu">ktbajaj@iu.edu</a>
-        <span class="sep">/</span>
-        <a href="LINKEDIN_URL">LinkedIn</a>
-        <span class="sep">/</span>
-        <a href="assets/konark-bajaj-resume.pdf">Résumé</a>
-      </p>
+      <div class="contacts">
+        <a class="chip" href="mailto:konarkb11@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 6.5L21 6"/></svg>
+          Email
+        </a>
+        <a class="chip" href="https://wa.me/917703955272" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 .01 16.47Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.1-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05s.88 2.38 1 2.54c.12.17 1.73 2.64 4.19 3.7.58.26 1.04.41 1.4.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+          WhatsApp
+        </a>
+        <a class="chip" href="https://www.linkedin.com/in/konarkbajaj/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM9.5 9h3.8v1.64h.05c.53-.95 1.83-1.95 3.76-1.95 4.02 0 4.76 2.5 4.76 5.76V21h-4v-5.78c0-1.38-.03-3.15-2-3.15-2 0-2.31 1.5-2.31 3.05V21h-4Z"/></svg>
+          LinkedIn
+        </a>
+        <a class="chip" href="https://www.instagram.com/try.clockwork/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+          @try.clockwork
+        </a>
+        <a class="chip" href="assets/konark-bajaj-resume.pdf">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/></svg>
+          Résumé
+        </a>
+      </div>
     </div>
-    <div class="photo-ph" id="photo-slot">photo<br>goes here</div>
+    <figure class="photo-fig">
+      <div class="photo-ph" id="photo-slot">photo<br>goes here</div>
+    </figure>
   </div>
 
-  <section>
+  <section class="rise">
     <h2>Building</h2>
 
     <div class="entry">
       <p class="when">2026 —<br>present</p>
       <div class="what">
-        <h3><a href="https://www.tryclockwork.app" target="_blank" rel="noopener">ClockWork</a></h3>
+        <div class="title-row">
+          <img class="mark sq" src="assets/clockwork.svg" alt="" />
+          <h3><a class="u" href="https://www.tryclockwork.app" target="_blank" rel="noopener">ClockWork</a><span class="arr"> ↗</span></h3>
+        </div>
         <p class="role">Co-founder &amp; CEO</p>
         <p>
           Attendance, payroll and advances for the people who run India's homes, shops and small
@@ -164,7 +253,10 @@
     <div class="entry">
       <p class="when">2025 —<br>present</p>
       <div class="what">
-        <h3><a href="https://thepatangstory.com/" target="_blank" rel="noopener">The Patang Story</a></h3>
+        <div class="title-row">
+          <img class="mark" src="assets/patang.svg" alt="" />
+          <h3><a class="u" href="https://thepatangstory.com/" target="_blank" rel="noopener">The Patang Story</a><span class="arr"> ↗</span></h3>
+        </div>
         <p class="role">Co-founder</p>
         <p>
           A regional snacks brand built on nostalgia, competing in a category owned by incumbents.
@@ -178,7 +270,7 @@
     <div class="entry">
       <p class="when">2023 — 2024</p>
       <div class="what">
-        <h3>EmpowerWomenIndia</h3>
+        <div class="title-row"><h3>EmpowerWomenIndia</h3></div>
         <p class="role">Founder</p>
         <p>
           A literacy and inclusion project making government schemes reachable for women in rural
@@ -189,7 +281,7 @@
     </div>
   </section>
 
-  <section>
+  <section class="rise">
     <h2>Worked</h2>
 
     <div class="brief">
@@ -230,7 +322,7 @@
     </div>
   </section>
 
-  <section>
+  <section class="rise">
     <h2>Studied</h2>
 
     <div class="brief">
@@ -257,12 +349,12 @@
     </div>
   </section>
 
-  <section>
+  <section class="rise">
     <h2>Also</h2>
     <p class="also">
       <b>Written.</b> A marketing research paper in an
-      <a href="https://shorturl.at/9Nzl4" target="_blank" rel="noopener">economics journal</a>, and a
-      <a href="https://shorturl.at/73LaB" target="_blank" rel="noopener">book</a> about female Nobel
+      <a class="u" href="https://shorturl.at/9Nzl4" target="_blank" rel="noopener">economics journal</a>, and a
+      <a class="u" href="https://shorturl.at/73LaB" target="_blank" rel="noopener">book</a> about female Nobel
       Prize winners, on Amazon.
     </p>
     <p class="also">
@@ -279,14 +371,53 @@
     </p>
   </section>
 
-  <footer>
-    <p class="foot">
-      Open to internships. Reach me at <a href="mailto:ktbajaj@iu.edu">ktbajaj@iu.edu</a>
-      <span class="sep">/</span> <a href="LINKEDIN_URL">LinkedIn</a>
-      <span class="sep">/</span> <a href="INSTAGRAM_URL">ClockWork on Instagram</a>
+  <footer class="rise">
+    <p class="foot-h">Get in touch</p>
+    <p class="foot-l">
+      Open to internships. WhatsApp is fastest, email is fine, and I read everything.
     </p>
+    <div class="contacts">
+      <a class="chip" href="https://wa.me/917703955272" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 .01 16.47Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.1-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05s.88 2.38 1 2.54c.12.17 1.73 2.64 4.19 3.7.58.26 1.04.41 1.4.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+        +91 77039 55272
+      </a>
+      <a class="chip" href="mailto:konarkb11@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 6.5L21 6"/></svg>
+        konarkb11@gmail.com
+      </a>
+      <a class="chip" href="mailto:ktbajaj@iu.edu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 6.5L21 6"/></svg>
+        ktbajaj@iu.edu
+      </a>
+      <a class="chip" href="https://www.linkedin.com/in/konarkbajaj/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM9.5 9h3.8v1.64h.05c.53-.95 1.83-1.95 3.76-1.95 4.02 0 4.76 2.5 4.76 5.76V21h-4v-5.78c0-1.38-.03-3.15-2-3.15-2 0-2.31 1.5-2.31 3.05V21h-4Z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <p class="foot-meta">Citizen of the United Kingdom. Based in Bloomington, Indiana.</p>
   </footer>
 
 </div>
+
+<script>
+  // A single short settle as each block first comes into view. No parallax, no scroll-jacking,
+  // nothing that moves twice, and nothing at all when the visitor asks for reduced motion.
+  (function () {
+    var blocks = document.querySelectorAll('.rise');
+    if (!window.IntersectionObserver ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      blocks.forEach(function (b) { b.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        io.unobserve(e.target);           // settles once, never replays
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: .06 });
+    blocks.forEach(function (b) { io.observe(b); });
+  })();
+</script>
 </body>
 </html>
