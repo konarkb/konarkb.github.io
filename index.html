@@ -12,6 +12,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<script>
+  /* Runs before first paint. Everything that starts hidden is scoped under .js, so with
+     JavaScript off or broken the whole page renders plainly — nothing is ever trapped
+     behind an animation that failed to fire. .rm short-circuits the lot for a visitor
+     who has asked their system for reduced motion. */
+  (function () {
+    var r = document.documentElement;
+    r.className += " js";
+    try {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) r.className += " rm";
+    } catch (e) {}
+  })();
+</script>
 <style>
   :root{
     --paper:#faf7f0;
@@ -161,35 +174,108 @@
   .foot-l{margin:0 0 1.3rem; color:var(--ink-3); font-weight:300; font-size:1rem; max-width:var(--measure)}
   .foot-meta{margin:1.6rem 0 0; font-size:.86rem; color:var(--ink-3); font-weight:300; font-style:italic}
 
-  /* ── entrance: a short settle, once, and never for reduced-motion ── */
-  .rise{opacity:0; transform:translateY(14px)}
-  .rise.in{opacity:1; transform:none; transition:opacity .7s var(--ease), transform .7s var(--ease)}
+  /* ══ 1. Page loader ══════════════════════════════════════════════════════
+     A hairline that tracks REAL milestones — stylesheet parsed, webfonts ready,
+     portrait decoded — then retracts. It never holds the page back and never waits
+     out a timer; on a fast connection you see one quick sweep, which is the truth. */
+  #load{
+    position:fixed; top:0; left:0; height:2px; width:0; z-index:99;
+    background:var(--link); opacity:.85;
+    transition:width .45s var(--ease), opacity .3s var(--ease) .25s;
+  }
+  .rm #load{display:none}
+
+  /* ══ 2. First paint ══
+     Hold content for webfonts so the masthead does not flash in a fallback serif and
+     then re-set. Capped at 1.2s by script, so a slow font CDN can never hide the page. */
+  .js:not(.rm) .page{opacity:0}
+  .js:not(.rm).ready .page{opacity:1; transition:opacity .5s var(--ease)}
+
+  /* ══ 3. Hero entrance ══
+     The masthead settles in reading order — name, location, paragraph, buttons, portrait —
+     over about 700ms. One pass, on load only. */
+  .js:not(.rm).ready .h-in{animation:heroIn .78s var(--ease) both}
+  .js:not(.rm) .h-in{opacity:0}
+  .js:not(.rm).ready .h-1{animation-delay:.02s}
+  .js:not(.rm).ready .h-2{animation-delay:.10s}
+  .js:not(.rm).ready .h-3{animation-delay:.17s}
+  .js:not(.rm).ready .h-4{animation-delay:.25s}
+  .js:not(.rm).ready .h-5{animation-delay:.12s}
+  @keyframes heroIn{
+    from{opacity:0; transform:translateY(16px)}
+    to{opacity:1; transform:none}
+  }
+
+  /* ══ 4. Scroll reveals ══ staggered per row within a section */
+  .js:not(.rm) .rise{opacity:0; transform:translateY(16px)}
+  .js:not(.rm) .rise.in{
+    opacity:1; transform:none;
+    transition:opacity .66s var(--ease), transform .66s var(--ease);
+  }
+
+  /* ══ 5. Parallax ══
+     Depth, at an amplitude you feel rather than notice: the portrait drifts a few pixels
+     against the text as you scroll. Transform only, written from rAF, so it never triggers
+     layout. Script leaves it switched off on coarse/narrow screens, where it just janks. */
+  /* Three effects want to transform this portrait: the hero entrance, the scroll parallax and
+     the hover lift. A CSS animation with fill-mode:both outranks inline style, so the entrance
+     would pin whatever parallax wrote. Each therefore owns its own element — figure animates,
+     .photo-par is parallaxed from script, the img handles hover. */
+  .photo-par{will-change:transform}
+
+  /* ══ Micro-interactions ══ */
+  .chip:active{transform:translateY(0) scale(.975)}
+  .chip .tick{width:0; overflow:hidden; opacity:0; transition:width .25s var(--ease), opacity .25s var(--ease)}
+  .chip.copied .tick{width:13px; opacity:1}
+  .chip.copied{border-color:#3f6b46; color:#3f6b46}
+  .copy-hint{
+    font-size:.78rem; color:var(--ink-3); font-style:italic; font-weight:300;
+    margin:.55rem 0 0; opacity:0; transition:opacity .3s var(--ease);
+  }
+  .copy-hint.on{opacity:1}
+  :focus-visible{outline:2px solid var(--link); outline-offset:3px; border-radius:2px}
+  .to-top{
+    position:fixed; right:1.4rem; bottom:1.4rem; z-index:60;
+    width:40px; height:40px; display:grid; place-items:center;
+    border:1px solid var(--rule-2); border-radius:50%; background:var(--paper);
+    color:var(--ink-2); opacity:0; pointer-events:none; transform:translateY(8px);
+    transition:opacity .35s var(--ease), transform .35s var(--ease),
+               border-color .25s var(--ease), color .25s var(--ease);
+  }
+  .to-top.on{opacity:1; pointer-events:auto; transform:none}
+  .to-top:hover{border-color:var(--ink); color:var(--ink)}
+  .to-top svg{width:15px; height:15px}
+  @media(max-width:620px){ .to-top{right:1rem; bottom:1rem} }
+
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     *{transition:none!important; animation:none!important}
-    .rise{opacity:1!important; transform:none!important}
+    .rise,.h-in,.page{opacity:1!important; transform:none!important}
   }
   @media print{
     body{background:#fff}
-    .page{padding:0} .rise{opacity:1!important; transform:none!important}
+    .page{padding:0; opacity:1!important}
+    .rise,.h-in{opacity:1!important; transform:none!important}
+    #load,.to-top{display:none}
   }
 </style>
 </head>
 <body>
+<div id="load" aria-hidden="true"></div>
 <div class="page">
 
-  <div class="mast rise">
+  <div class="mast">
     <div>
-      <h1>Konark Bajaj</h1>
-      <p class="sub">Bloomington, Indiana &amp; New Delhi</p>
-      <p class="intro">
+      <h1 class="h-in h-1">Konark Bajaj</h1>
+      <p class="sub h-in h-2">Bloomington, Indiana &amp; New Delhi</p>
+      <p class="intro h-in h-3">
         I study entrepreneurship at <strong>IU Kelley</strong> and spend most of my time building.
         Right now that means <strong>ClockWork</strong>, payroll and attendance software running in
         production for India's informal employers, and <strong>The Patang Story</strong>, a regional
         snacks brand that has sold over <strong>$110,000</strong> worth of product.
         I am looking for an internship where I can keep shipping.
       </p>
-      <div class="contacts">
+      <div class="contacts h-in h-4">
         <a class="chip" href="mailto:konarkb11@gmail.com">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 6.5L21 6"/></svg>
           Email
@@ -211,10 +297,13 @@
           Résumé
         </a>
       </div>
+      <p class="copy-hint" id="copy-hint" role="status" aria-live="polite"></p>
     </div>
-    <figure class="photo-fig">
-      <img class="photo" src="assets/konark.jpg" width="420" height="525"
-           alt="Konark Bajaj" />
+    <figure class="photo-fig h-in h-5">
+      <div class="photo-par">
+        <img class="photo" src="assets/konark.jpg" width="420" height="525"
+             alt="Konark Bajaj" />
+      </div>
     </figure>
   </div>
 
@@ -398,25 +487,148 @@
 
 </div>
 
+<button class="to-top" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+</button>
+
 <script>
-  // A single short settle as each block first comes into view. No parallax, no scroll-jacking,
-  // nothing that moves twice, and nothing at all when the visitor asks for reduced motion.
-  (function () {
-    var blocks = document.querySelectorAll('.rise');
-    if (!window.IntersectionObserver ||
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      blocks.forEach(function (b) { b.classList.add('in'); });
-      return;
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var reduced = root.classList.contains("rm");
+
+  /* ── 1. Loader ──────────────────────────────────────────────────────────────
+     Driven by real milestones, never by a timer. Each one that lands pushes the bar
+     further; when all are in it completes and retracts. Nothing is gated behind it. */
+  var bar = document.getElementById("load");
+  var done = 0, TOTAL = 3;
+  function step() {
+    done++;
+    if (!bar) return;
+    var pct = Math.min(100, Math.round((done / TOTAL) * 100));
+    bar.style.width = pct + "%";
+    if (done >= TOTAL) {
+      bar.style.opacity = "0";
+      setTimeout(function () { if (bar && bar.parentNode) bar.parentNode.removeChild(bar); }, 700);
     }
+  }
+
+  /* ── 2. First paint ──
+     Wait for webfonts so the masthead does not set in a fallback and visibly re-flow.
+     Hard-capped: a slow or blocked font CDN must never leave the page invisible. */
+  function reveal() {
+    if (root.classList.contains("ready")) return;
+    root.classList.add("ready");
+  }
+  var capped = setTimeout(function () { reveal(); step(); }, 1200);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () {
+      clearTimeout(capped); reveal(); step();
+    })["catch"](function () { clearTimeout(capped); reveal(); step(); });
+  } else {
+    clearTimeout(capped); reveal(); step();
+  }
+  step();                                   // stylesheet parsed: this script is running
+
+  var portrait = document.querySelector(".photo");
+  if (!portrait) { step(); }
+  else if (portrait.complete) { step(); }
+  else {
+    portrait.addEventListener("load", step, { once: true });
+    portrait.addEventListener("error", step, { once: true });
+  }
+
+  /* ── 4. Scroll reveals ──
+     Each block settles once as it first enters view, its rows staggered a beat apart.
+     Unobserved immediately after, so nothing ever replays on the way back up. */
+  var blocks = [].slice.call(document.querySelectorAll(".rise"));
+  if (reduced || !("IntersectionObserver" in window)) {
+    blocks.forEach(function (b) { b.classList.add("in"); });
+  } else {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
-        e.target.classList.add('in');
-        io.unobserve(e.target);           // settles once, never replays
+        var rows = [].slice.call(e.target.querySelectorAll(".entry, .brief, .also"));
+        e.target.classList.add("in");
+        rows.forEach(function (row, i) {
+          row.style.transition = "opacity .6s var(--ease) " + (i * 70) + "ms," +
+                                 "transform .6s var(--ease) " + (i * 70) + "ms";
+        });
+        io.unobserve(e.target);
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: .06 });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
     blocks.forEach(function (b) { io.observe(b); });
-  })();
+  }
+
+  /* ── 5. Parallax ──
+     The portrait drifts against the text as you scroll: depth you feel rather than notice,
+     clamped to ±18px. Transform only, written once per frame from rAF, so it never forces
+     layout. Off for reduced motion, off on coarse pointers and narrow screens, where the
+     effect reads as jank rather than depth. */
+  var fig = document.querySelector(".photo-par");
+  var fine = window.matchMedia("(pointer: fine)").matches && window.innerWidth > 860;
+  if (fig && fine && !reduced) {
+    var ticking = false, MAX = 18;
+    var onScroll = function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var y = window.pageYOffset || 0;
+        var shift = Math.max(-MAX, Math.min(MAX, y * -0.06));
+        fig.style.transform = "translate3d(0," + shift.toFixed(2) + "px,0)";
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ── Micro-interactions ──
+     Click an email chip and the address goes to the clipboard, with the chip confirming
+     in place. The href stays a real mailto:, so the ordinary click-through still works
+     for anyone with a mail client and for middle-click or keyboard activation. */
+  var TICK = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+             'stroke-width="2.2" aria-hidden><path d="m5 13 4 4L19 7"/></svg>';
+  [].slice.call(document.querySelectorAll('a.chip[href^="mailto:"]')).forEach(function (a) {
+    a.insertAdjacentHTML("beforeend", TICK);
+    a.addEventListener("click", function (ev) {
+      if (!navigator.clipboard || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button !== 0) return;
+      var addr = a.getAttribute("href").replace(/^mailto:/, "");
+      navigator.clipboard.writeText(addr).then(function () {
+        ev.preventDefault();
+        a.classList.add("copied");
+        var hint = document.getElementById("copy-hint");
+        if (hint) {
+          hint.textContent = "Copied " + addr + " to your clipboard.";
+          hint.classList.add("on");
+        }
+        setTimeout(function () {
+          a.classList.remove("copied");
+          if (hint) hint.classList.remove("on");
+        }, 2200);
+      })["catch"](function () { /* clipboard refused: the mailto: proceeds as normal */ });
+    });
+  });
+
+  /* Back to top: appears only once there is a way back. */
+  var top = document.querySelector(".to-top");
+  if (top) {
+    var tick2 = false;
+    var onS2 = function () {
+      if (tick2) return;
+      tick2 = true;
+      requestAnimationFrame(function () {
+        top.classList.toggle("on", (window.pageYOffset || 0) > 700);
+        tick2 = false;
+      });
+    };
+    window.addEventListener("scroll", onS2, { passive: true });
+    top.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+    });
+    onS2();
+  }
+})();
 </script>
 </body>
 </html>
