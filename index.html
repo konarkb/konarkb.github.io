@@ -74,6 +74,12 @@
     letter-spacing:-.022em; margin:0 0 .45rem;
   }
   .sub{font-size:1rem; color:var(--tan); font-style:italic; font-weight:300; margin:0 0 1.6rem}
+  /* Narrow screens stack the two facts instead of running them together on one line. */
+  @media(max-width:520px){
+    .sub-sep{display:none}
+    .sub-a,.sub-b{display:block}
+    .sub{line-height:1.45}
+  }
   .intro{margin:0; max-width:var(--measure); color:var(--ink-2); font-weight:300; font-size:1.07rem}
   .intro strong{font-weight:500; color:var(--ink)}
 
@@ -405,7 +411,7 @@
   <div class="mast">
     <div>
       <h1 class="bigname"><span class="w"><i>Konark</i></span> <span class="w"><i>Bajaj</i></span></h1>
-      <p class="sub h-in h-2">Bloomington, Indiana &amp; New Delhi</p>
+      <p class="sub h-in h-2"><span class="sub-a">Citizen of the United Kingdom</span><span class="sub-sep"> &middot; </span><span class="sub-b">Bloomington, Indiana &amp; New Delhi</span></p>
       <p class="intro h-in h-3">
         I study entrepreneurship at <strong>IU Kelley</strong> and spend most of my time building.
         Right now that means <strong>ClockWork</strong>, payroll and attendance software running in
@@ -625,7 +631,7 @@
         LinkedIn
       </a>
     </div>
-    <p class="foot-meta">Citizen of the United Kingdom. Based in Bloomington, Indiana.</p>
+    <p class="foot-meta">Based in Bloomington, Indiana.</p>
   </footer>
 
 </div>
